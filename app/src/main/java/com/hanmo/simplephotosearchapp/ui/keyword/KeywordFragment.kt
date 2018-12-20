@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.hanmo.simplephotosearchapp.R
 import com.hanmo.simplephotosearchapp.base.BaseFragment
+import com.hanmo.simplephotosearchapp.data.realm.RealmService
 import com.hanmo.simplephotosearchapp.di.annotation.ActivityScoped
+import kotlinx.android.synthetic.main.fragment_keyword.*
 import javax.inject.Inject
 
 @ActivityScoped
@@ -22,6 +24,8 @@ class KeywordFragment @Inject constructor() : BaseFragment(), KeywordContract.Vi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         presenter.takeView(this)
+        keyword?.text = RealmService.getKeywordList()?.toString()
+
     }
 
     override fun onDestroy() {

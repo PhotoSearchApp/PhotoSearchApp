@@ -3,4 +3,5 @@
 
     <string name="flickrSearchText">Flickr Search</string>
     <string name="colon">:</string>
+    <string name="createRealm">createRealm</string>
 </resources>
