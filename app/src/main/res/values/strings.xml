@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">SimplePhotoSearchApp</string>
+
+    <string name="flickrSearchText">Flickr Search</string>
+    <string name="colon">:</string>
 </resources>
