@@ -29,16 +29,4 @@ class KeywordFragment @Inject constructor() : BaseFragment(), KeywordContract.Vi
         presenter.dropView()
     }
 
-    override fun showLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun hideLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showError(error: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
 }

@@ -9,7 +9,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBindingModule {
 
     @ActivityScoped
-    @ContributesAndroidInjector(modules = [KeywordModule::class])
+    @ContributesAndroidInjector(modules = [KeywordModule::class, ContentModule::class])
     abstract fun photoSearchActivity() : PhotoSearchActivity
 
 }
