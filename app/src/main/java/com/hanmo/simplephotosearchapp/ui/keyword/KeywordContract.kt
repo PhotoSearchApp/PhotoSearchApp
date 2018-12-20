@@ -1,9 +1,9 @@
-package com.hanmo.simplephotosearchapp.ui.search
+package com.hanmo.simplephotosearchapp.ui.keyword
 
 import com.hanmo.simplephotosearchapp.base.BasePresenter
 import com.hanmo.simplephotosearchapp.base.BaseView
 
-interface PhotoSearchContract {
+interface KeywordContract {
 
     interface View : BaseView {
 

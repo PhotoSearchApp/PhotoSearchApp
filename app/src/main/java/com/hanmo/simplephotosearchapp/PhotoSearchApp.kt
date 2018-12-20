@@ -1,5 +1,6 @@
 package com.hanmo.simplephotosearchapp
 
+import com.hanmo.simplephotosearchapp.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 
