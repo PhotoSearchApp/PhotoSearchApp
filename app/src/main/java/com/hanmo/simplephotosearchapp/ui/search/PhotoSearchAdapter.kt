@@ -1,7 +1,9 @@
 package com.hanmo.simplephotosearchapp.ui.search
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.hanmo.simplephotosearchapp.CONTENT
 import com.hanmo.simplephotosearchapp.KEYWORD
@@ -18,6 +20,16 @@ class PhotoSearchAdapter(private val type : Int) : RecyclerView.Adapter<Recycler
 
     private var keywordList : MutableList<String> = mutableListOf()
     private var contentList : MutableList<String> = mutableListOf()
+
+    private lateinit var itemClickListener : OnItemClickListener
+
+    fun setOnItemClickListener(itemClickListener : OnItemClickListener) {
+        this.itemClickListener = itemClickListener
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when(viewType) {
@@ -54,12 +66,20 @@ class PhotoSearchAdapter(private val type : Int) : RecyclerView.Adapter<Recycler
     }
 
     inner class KeywordHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_keyword, parent, false)){
+            LayoutInflater.from(parent.context).inflate(R.layout.item_keyword, parent, false)), View.OnClickListener{
+
+        init {
+            itemView.keyword.setOnClickListener(this)
+        }
 
         fun onBind(keywordName: String) {
             itemView?.run {
                 keyword.text = keywordName
             }
+        }
+
+        override fun onClick(v: View?) {
+            itemClickListener.onItemClick(adapterPosition)
         }
     }
 
