@@ -1,4 +1,4 @@
-package com.hanmo.simplephotosearchapp.ui.keyword
+package com.hanmo.simplephotosearchapp.ui.search.keyword
 
 import android.os.Bundle
 import android.view.LayoutInflater

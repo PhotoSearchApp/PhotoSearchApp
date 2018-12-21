@@ -1,4 +1,4 @@
-package com.hanmo.simplephotosearchapp.ui.keyword
+package com.hanmo.simplephotosearchapp.ui.search.keyword
 
 import com.hanmo.simplephotosearchapp.base.BasePresenter
 import com.hanmo.simplephotosearchapp.base.BaseView

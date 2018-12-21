@@ -1,4 +1,4 @@
-package com.hanmo.simplephotosearchapp.ui.keyword
+package com.hanmo.simplephotosearchapp.ui.search.keyword
 
 import com.hanmo.simplephotosearchapp.di.annotation.ActivityScoped
 import javax.inject.Inject

@@ -4,8 +4,8 @@ import android.os.Bundle
 import com.hanmo.simplephotosearchapp.R
 import com.hanmo.simplephotosearchapp.base.BaseActivity
 import com.hanmo.simplephotosearchapp.di.annotation.ActivityScoped
-import com.hanmo.simplephotosearchapp.ui.content.ContentFragment
-import com.hanmo.simplephotosearchapp.ui.keyword.KeywordFragment
+import com.hanmo.simplephotosearchapp.ui.search.content.ContentFragment
+import com.hanmo.simplephotosearchapp.ui.search.keyword.KeywordFragment
 import dagger.Lazy
 import javax.inject.Inject
 
