@@ -10,7 +10,7 @@ interface ContentContract {
     }
 
     interface Presenter : BasePresenter<View> {
-        
+
     }
 
 }

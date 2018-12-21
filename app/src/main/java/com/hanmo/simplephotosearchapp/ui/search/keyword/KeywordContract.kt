@@ -6,7 +6,8 @@ import com.hanmo.simplephotosearchapp.base.BaseView
 interface KeywordContract {
 
     interface View : BaseView {
-
+        fun initKeywordList()
+        fun loadKeywordList()
     }
 
     interface Presenter : BasePresenter<View> {
