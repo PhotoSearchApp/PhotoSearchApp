@@ -9,8 +9,8 @@ import retrofit2.http.Query
 
 interface PhotoSearchApi {
 
-    @GET("/rest/")
+    @GET("rest/")
     fun getPhotos(@Query("method") method: String, @Query("api_key") apiKey: String,
-                  @Query("text") keyword: String, @Query("per_page") perPage: String,
-                  @Query("page") page: String, @Query("format") format: String, @Query("nojsoncallback") callback : Int) : Single<Response<Photos>>
+                  @Query("text") keyword: String, @Query("per_page") perPage: Int,
+                  @Query("page") page: Int, @Query("format") format: String, @Query("nojsoncallback") callback : Int) : Single<Response<Photos>>
 }

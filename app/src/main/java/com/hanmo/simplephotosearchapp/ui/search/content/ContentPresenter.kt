@@ -1,5 +1,6 @@
 package com.hanmo.simplephotosearchapp.ui.search.content
 
+import android.util.Log
 import com.hanmo.simplephotosearchapp.di.annotation.ActivityScoped
 import com.hanmo.simplephotosearchapp.repository.PhotoSearchRepository
 import javax.inject.Inject
@@ -11,6 +12,12 @@ class ContentPresenter @Inject constructor(private val photoSearchRepository: Ph
 
     override fun takeView(view: ContentContract.View) {
         contentView = view
+
+        photoSearchRepository.getPhotos("Apple", 10, 1)
+                .subscribe(
+                        { res -> Log.e("photosearch ", res.body()?.photos.toString())
+                        }, { error -> Log.e("photosearch ", "errror is : $error") }
+                )
     }
 
     override fun dropView() {

@@ -9,8 +9,8 @@ import retrofit2.Response
 
 class PhotoSearchRepository(private val photoSearchApi: PhotoSearchApi) {
 
-    fun getPhotos(keyword: String, perPage: String, page: String) : Single<Response<Photos>> {
-        val authKey = ""
+    fun getPhotos(keyword: String, perPage: Int, page: Int) : Single<Response<Photos>> {
+        val authKey = "2f904f1669187c7860cae324d891ccd3"
         val method = "flickr.photos.search"
         val format = "json"
         val callback = 1
