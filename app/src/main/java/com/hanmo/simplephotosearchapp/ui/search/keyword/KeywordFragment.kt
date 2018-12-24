@@ -2,7 +2,6 @@ package com.hanmo.simplephotosearchapp.ui.search.keyword
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,8 +22,8 @@ class KeywordFragment @Inject constructor() : BaseFragment(), KeywordContract.Vi
     private val keywordAdapter : PhotoSearchAdapter by lazy { PhotoSearchAdapter(KEYWORD) }
 
     private val onItemClickListener = object : PhotoSearchAdapter.OnItemClickListener {
-        override fun onItemClick(position: Int) {
-            presenter.clickedKeyword(position)
+        override fun onItemClick(keywordName: String) {
+            presenter.clickedKeyword(keywordName)
         }
     }
 

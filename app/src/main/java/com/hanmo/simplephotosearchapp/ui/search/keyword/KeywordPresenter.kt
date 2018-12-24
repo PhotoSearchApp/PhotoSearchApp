@@ -1,15 +1,14 @@
 package com.hanmo.simplephotosearchapp.ui.search.keyword
 
-import android.util.Log
+import com.hanmo.simplephotosearchapp.RxEventBus.post
 import com.hanmo.simplephotosearchapp.di.annotation.ActivityScoped
-import io.reactivex.subjects.PublishSubject
+import com.hanmo.simplephotosearchapp.model.Keyword
 import javax.inject.Inject
 
 @ActivityScoped
 class KeywordPresenter @Inject constructor() : KeywordContract.Presenter {
 
     private var keywordView : KeywordContract.View? = null
-    private val itemClickSubject = PublishSubject.create<Int>()
 
     override fun takeView(view: KeywordContract.View) {
         keywordView = view
@@ -20,8 +19,8 @@ class KeywordPresenter @Inject constructor() : KeywordContract.Presenter {
         }
     }
 
-    override fun clickedKeyword(keywordId: Int) {
-        itemClickSubject.onNext(keywordId)
+    override fun clickedKeyword(keywordName: String) {
+        post(Keyword(keywordName))
     }
 
     override fun dropView() {

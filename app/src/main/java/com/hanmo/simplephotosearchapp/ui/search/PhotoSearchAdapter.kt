@@ -31,7 +31,7 @@ class PhotoSearchAdapter(private val type : Int) : RecyclerView.Adapter<Recycler
     }
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(keywordName: String)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -92,7 +92,7 @@ class PhotoSearchAdapter(private val type : Int) : RecyclerView.Adapter<Recycler
         }
 
         override fun onClick(v: View?) {
-            itemClickListener.onItemClick(adapterPosition)
+            itemClickListener.onItemClick(keywordList[adapterPosition])
         }
     }
 

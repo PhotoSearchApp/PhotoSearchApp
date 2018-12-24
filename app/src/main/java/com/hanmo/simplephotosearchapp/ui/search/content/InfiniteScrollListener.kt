@@ -2,6 +2,7 @@ package com.hanmo.simplephotosearchapp.ui.search.content
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 
 abstract class InfiniteScrollListener(val layoutManager: LinearLayoutManager) : RecyclerView.OnScrollListener() {
 

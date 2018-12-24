@@ -45,6 +45,10 @@ class ContentFragment @Inject constructor() : BaseFragment(), ContentContract.Vi
 
             addOnScrollListener(infiniteScrollListener)
         }
+
+        contentRefresh.setOnRefreshListener {
+            presenter.loadPhotoList(1)
+        }
     }
 
     override fun showContentList(contentList: MutableList<Photo>) {
@@ -53,6 +57,14 @@ class ContentFragment @Inject constructor() : BaseFragment(), ContentContract.Vi
 
     override fun updateContentList(contentList: MutableList<Photo>) {
         contentAdapter.updateContent(contentList)
+    }
+
+    override fun showProgress() {
+        contentRefresh.isRefreshing = true
+    }
+
+    override fun hideProgress() {
+        contentRefresh.isRefreshing = false
     }
 
     override fun onDestroy() {

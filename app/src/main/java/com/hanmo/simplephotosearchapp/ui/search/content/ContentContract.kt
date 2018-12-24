@@ -12,10 +12,14 @@ interface ContentContract {
         fun initContentList()
         fun showContentList(contentList : MutableList<Photo>)
         fun updateContentList(contentList : MutableList<Photo>)
+
+        fun showProgress()
+        fun hideProgress()
     }
 
     interface Presenter : BasePresenter<View> {
         fun loadPhotoList(page : Int)
+        fun keywordClickedObservable()
     }
 
 }

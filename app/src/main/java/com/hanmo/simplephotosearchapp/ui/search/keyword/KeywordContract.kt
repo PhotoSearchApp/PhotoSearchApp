@@ -11,7 +11,7 @@ interface KeywordContract {
     }
 
     interface Presenter : BasePresenter<View> {
-        fun clickedKeyword(keywordId : Int)
+        fun clickedKeyword(keywordName: String)
     }
 
 }
