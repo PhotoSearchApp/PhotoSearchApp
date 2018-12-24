@@ -1,14 +1,17 @@
 package com.hanmo.simplephotosearchapp.ui.search
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.hanmo.simplephotosearchapp.CONTENT
 import com.hanmo.simplephotosearchapp.KEYWORD
 import com.hanmo.simplephotosearchapp.R
 import com.hanmo.simplephotosearchapp.data.realm.RealmService
+import com.hanmo.simplephotosearchapp.model.Photo
+import kotlinx.android.synthetic.main.item_content.view.*
 import kotlinx.android.synthetic.main.item_keyword.view.*
 
 /**
@@ -19,7 +22,7 @@ import kotlinx.android.synthetic.main.item_keyword.view.*
 class PhotoSearchAdapter(private val type : Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var keywordList : MutableList<String> = mutableListOf()
-    private var contentList : MutableList<String> = mutableListOf()
+    private var contentList : MutableList<Photo> = mutableListOf()
 
     private lateinit var itemClickListener : OnItemClickListener
 
@@ -50,7 +53,7 @@ class PhotoSearchAdapter(private val type : Int) : RecyclerView.Adapter<Recycler
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder) {
             is KeywordHolder -> holder.onBind(keywordList[position])
-            is ContentHolder -> {}
+            is ContentHolder -> holder.onBind(contentList[position])
         }
     }
 
@@ -62,6 +65,16 @@ class PhotoSearchAdapter(private val type : Int) : RecyclerView.Adapter<Recycler
         RealmService.getKeywordList()?.forEach { keyword ->
             keyword.name?.let { name -> keywordList.add(name) }
         }
+        notifyDataSetChanged()
+    }
+
+    fun loadContent(contentList : MutableList<Photo>) {
+        this.contentList = contentList
+        notifyDataSetChanged()
+    }
+
+    fun updateContent(contentList : MutableList<Photo>) {
+        this.contentList.addAll(contentList)
         notifyDataSetChanged()
     }
 
@@ -86,6 +99,13 @@ class PhotoSearchAdapter(private val type : Int) : RecyclerView.Adapter<Recycler
     inner class ContentHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_content, parent, false)) {
 
+        fun onBind(photo: Photo) {
+            itemView?.run {
+                val imageUrl = "https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg"
+                Glide.with(context).load(imageUrl).apply(RequestOptions().fitCenter()).thumbnail(0.1f).into(photoImage)
+                photoTitle.text = photo.title
+            }
+        }
     }
 
 }
