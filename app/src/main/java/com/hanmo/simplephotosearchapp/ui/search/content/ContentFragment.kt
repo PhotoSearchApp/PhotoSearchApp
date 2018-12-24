@@ -1,5 +1,6 @@
 package com.hanmo.simplephotosearchapp.ui.search.content
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import com.hanmo.simplephotosearchapp.R
 import com.hanmo.simplephotosearchapp.base.BaseFragment
 import com.hanmo.simplephotosearchapp.di.annotation.ActivityScoped
+import com.hanmo.simplephotosearchapp.ui.search.PhotoSearchActivity
 import javax.inject.Inject
 
 @ActivityScoped
@@ -27,6 +29,10 @@ class ContentFragment @Inject constructor() : BaseFragment(), ContentContract.Vi
     override fun onDestroy() {
         super.onDestroy()
         presenter.dropView()
+    }
+
+    override fun getContext(): Context? {
+        return  activity
     }
 
 }

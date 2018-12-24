@@ -4,4 +4,7 @@
     <string name="flickrSearchText">Flickr Search</string>
     <string name="colon">:</string>
     <string name="createRealm">createRealm</string>
+    <string name="authKey">2f904f1669187c7860cae324d891ccd3</string>
+    <string name="method">flickr.photos.search</string>
+    <string name="format">json</string>
 </resources>

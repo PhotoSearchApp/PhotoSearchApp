@@ -9,11 +9,7 @@ import retrofit2.Response
 
 class PhotoSearchRepository(private val photoSearchApi: PhotoSearchApi) {
 
-    fun getPhotos(keyword: String, perPage: Int, page: Int) : Single<Response<Photos>> {
-        val authKey = "2f904f1669187c7860cae324d891ccd3"
-        val method = "flickr.photos.search"
-        val format = "json"
-        val callback = 1
+    fun getPhotos(keyword: String, perPage: Int, page: Int, method : String, authKey : String, format : String, callback : Int) : Single<Response<Photos>> {
         return photoSearchApi.getPhotos(method, authKey, keyword, perPage, page, format, callback)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

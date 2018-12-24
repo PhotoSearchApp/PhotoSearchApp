@@ -37,4 +37,10 @@ object RealmService {
             return realm.where(Keyword::class.java)?.findAll()
         }
     }
+
+    fun getFirstKeyword(): String? {
+        Realm.getDefaultInstance().use { realm ->
+            return realm.where(Keyword::class.java)?.findAll()?.first()?.name
+        }
+    }
 }
