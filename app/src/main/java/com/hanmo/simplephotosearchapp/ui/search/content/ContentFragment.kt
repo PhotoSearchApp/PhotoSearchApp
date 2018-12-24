@@ -24,6 +24,8 @@ class ContentFragment @Inject constructor() : BaseFragment(), ContentContract.Vi
 
     private val contentAdapter : PhotoSearchAdapter by lazy { PhotoSearchAdapter(CONTENT) }
 
+    private lateinit var infiniteScrollListener : InfiniteScrollListener
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_content, container, false)
     }
@@ -37,7 +39,7 @@ class ContentFragment @Inject constructor() : BaseFragment(), ContentContract.Vi
         contentList?.run {
             adapter = contentAdapter
 
-            val infiniteScrollListener = object : InfiniteScrollListener(layoutManager as LinearLayoutManager) {
+            infiniteScrollListener = object : InfiniteScrollListener(layoutManager as LinearLayoutManager) {
                 override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                     presenter.loadPhotoList(page)
                 }
@@ -52,6 +54,7 @@ class ContentFragment @Inject constructor() : BaseFragment(), ContentContract.Vi
     }
 
     override fun showContentList(contentList: MutableList<Photo>) {
+        infiniteScrollListener.resetState()
         contentAdapter.loadContent(contentList)
     }
 

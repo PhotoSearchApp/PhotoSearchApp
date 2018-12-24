@@ -8,7 +8,6 @@ import com.hanmo.simplephotosearchapp.di.annotation.ActivityScoped
 import com.hanmo.simplephotosearchapp.model.Keyword
 import com.hanmo.simplephotosearchapp.repository.PhotoSearchRepository
 import io.reactivex.disposables.CompositeDisposable
-import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 @ActivityScoped
@@ -43,7 +42,6 @@ class ContentPresenter @Inject constructor(private val photoSearchRepository: Ph
         contentView?.getContext()?.run {
 
             contentView?.showProgress()
-            toast("$keyword  $page")
             photoSearchRepository.getPhotos(keyword, 10, page, getString(R.string.method), getString(R.string.authKey), getString(R.string.format), 1)
                     .doOnError { contentView?.hideProgress() }
                     .doOnSuccess { contentView?.hideProgress() }

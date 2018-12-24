@@ -2,7 +2,6 @@ package com.hanmo.simplephotosearchapp.ui.search.content
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 
 abstract class InfiniteScrollListener(val layoutManager: LinearLayoutManager) : RecyclerView.OnScrollListener() {
 
@@ -36,6 +35,12 @@ abstract class InfiniteScrollListener(val layoutManager: LinearLayoutManager) : 
         }
     }
 
+    fun resetState() {
+        this.currentPage = 1
+        this.latestTotalItemCount = 0
+        this.isLoading = true
+        layoutManager.scrollToPositionWithOffset(0, 0)
+    }
 
     abstract fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?)
 }
