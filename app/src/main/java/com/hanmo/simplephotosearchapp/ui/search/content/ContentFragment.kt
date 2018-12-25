@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import com.hanmo.simplephotosearchapp.CONTENT
 import com.hanmo.simplephotosearchapp.R
 import com.hanmo.simplephotosearchapp.base.BaseFragment
@@ -23,6 +25,8 @@ class ContentFragment @Inject constructor() : BaseFragment(), ContentContract.Vi
     lateinit var presenter: ContentPresenter
 
     private val contentAdapter : PhotoSearchAdapter by lazy { PhotoSearchAdapter(CONTENT) }
+
+    private val dropDownAnimation : LayoutAnimationController by lazy { AnimationUtils.loadLayoutAnimation(context, R.anim.layout_anim_drop_down) }
 
     private lateinit var infiniteScrollListener : InfiniteScrollListener
 
@@ -48,14 +52,19 @@ class ContentFragment @Inject constructor() : BaseFragment(), ContentContract.Vi
             addOnScrollListener(infiniteScrollListener)
         }
 
-        contentRefresh.setOnRefreshListener {
+        contentRefresh?.setOnRefreshListener {
             presenter.loadPhotoList(1)
         }
     }
 
     override fun showContentList(contentList: MutableList<Photo>) {
         infiniteScrollListener.resetState()
+        showDropDownAnim()
         contentAdapter.loadContent(contentList)
+    }
+
+    override fun showDropDownAnim() {
+        contentList?.layoutAnimation = dropDownAnimation
     }
 
     override fun updateContentList(contentList: MutableList<Photo>) {
@@ -63,11 +72,11 @@ class ContentFragment @Inject constructor() : BaseFragment(), ContentContract.Vi
     }
 
     override fun showProgress() {
-        contentRefresh.isRefreshing = true
+        contentRefresh?.isRefreshing = true
     }
 
     override fun hideProgress() {
-        contentRefresh.isRefreshing = false
+        contentRefresh?.isRefreshing = false
     }
 
     override fun onDestroy() {

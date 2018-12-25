@@ -1,6 +1,6 @@
 package com.hanmo.simplephotosearchapp.ui.search.keyword
 
-import com.hanmo.simplephotosearchapp.RxEventBus.post
+import com.hanmo.simplephotosearchapp.util.RxEventBus.post
 import com.hanmo.simplephotosearchapp.di.annotation.ActivityScoped
 import com.hanmo.simplephotosearchapp.model.Keyword
 import javax.inject.Inject

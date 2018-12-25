@@ -1,4 +1,4 @@
-package com.hanmo.simplephotosearchapp
+package com.hanmo.simplephotosearchapp.util
 
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject

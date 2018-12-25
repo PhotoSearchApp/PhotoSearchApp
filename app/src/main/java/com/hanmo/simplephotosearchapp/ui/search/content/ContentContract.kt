@@ -13,6 +13,7 @@ interface ContentContract {
         fun showContentList(contentList : MutableList<Photo>)
         fun updateContentList(contentList : MutableList<Photo>)
 
+        fun showDropDownAnim()
         fun showProgress()
         fun hideProgress()
     }

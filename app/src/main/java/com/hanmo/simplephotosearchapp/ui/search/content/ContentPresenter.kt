@@ -2,7 +2,7 @@ package com.hanmo.simplephotosearchapp.ui.search.content
 
 import android.util.Log
 import com.hanmo.simplephotosearchapp.R
-import com.hanmo.simplephotosearchapp.RxEventBus
+import com.hanmo.simplephotosearchapp.util.RxEventBus
 import com.hanmo.simplephotosearchapp.data.realm.RealmService
 import com.hanmo.simplephotosearchapp.di.annotation.ActivityScoped
 import com.hanmo.simplephotosearchapp.model.Keyword
