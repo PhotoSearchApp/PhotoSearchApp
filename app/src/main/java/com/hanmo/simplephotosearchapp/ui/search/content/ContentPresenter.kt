@@ -79,6 +79,7 @@ class ContentPresenter @Inject constructor(private val photoSearchRepository: Ph
                                 }, { error -> contentView?.showError("네트워크 오류가 발생하였습니다.") }
                         ).apply { compositeDisposable.add(this) }
             } else {
+                contentView?.hideProgress()
                 contentView?.showError("네트워크 연결상태를 확인해주십시오.")
             }
         }
