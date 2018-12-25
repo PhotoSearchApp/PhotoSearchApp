@@ -14,7 +14,7 @@ object RealmService {
                 val keywordList = listOf(
                         "Apple", "Banana", "Cat",
                         "Dog", "Egg", "Fox", "Goat",
-                        "Horse", "Icon", "Jamaica"
+                        "Horse", "Icon", "Jamaica", "++++"
                 )
 
                 keywordList.forEachIndexed { index, keywordName ->

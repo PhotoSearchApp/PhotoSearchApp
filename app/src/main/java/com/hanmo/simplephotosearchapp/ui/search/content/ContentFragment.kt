@@ -16,6 +16,7 @@ import com.hanmo.simplephotosearchapp.di.annotation.ActivityScoped
 import com.hanmo.simplephotosearchapp.model.Photo
 import com.hanmo.simplephotosearchapp.ui.search.PhotoSearchAdapter
 import kotlinx.android.synthetic.main.fragment_content.*
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 @ActivityScoped
@@ -40,7 +41,7 @@ class ContentFragment @Inject constructor() : BaseFragment(), ContentContract.Vi
     }
 
     override fun initContentList() {
-        contentList?.run {
+        contentListView?.run {
             adapter = contentAdapter
 
             infiniteScrollListener = object : InfiniteScrollListener(layoutManager as LinearLayoutManager) {
@@ -58,17 +59,26 @@ class ContentFragment @Inject constructor() : BaseFragment(), ContentContract.Vi
     }
 
     override fun showContentList(contentList: MutableList<Photo>) {
+
+        notResultText?.visibility = View.GONE
+        contentListView?.visibility = View.VISIBLE
+
         infiniteScrollListener.resetState()
         showDropDownAnim()
         contentAdapter.loadContent(contentList)
     }
 
     override fun showDropDownAnim() {
-        contentList?.layoutAnimation = dropDownAnimation
+        contentListView?.layoutAnimation = dropDownAnimation
     }
 
     override fun updateContentList(contentList: MutableList<Photo>) {
         contentAdapter.updateContent(contentList)
+    }
+
+    override fun showNotResult() {
+        notResultText?.visibility = View.VISIBLE
+        contentListView?.visibility = View.GONE
     }
 
     override fun showProgress() {
@@ -77,6 +87,10 @@ class ContentFragment @Inject constructor() : BaseFragment(), ContentContract.Vi
 
     override fun hideProgress() {
         contentRefresh?.isRefreshing = false
+    }
+
+    override fun showError(msg: String) {
+        activity?.toast(msg)
     }
 
     override fun onDestroy() {

@@ -7,4 +7,5 @@
     <string name="authKey">2f904f1669187c7860cae324d891ccd3</string>
     <string name="method">flickr.photos.search</string>
     <string name="format">json</string>
+    <string name="notResult">결과가 없습니다.</string>
 </resources>

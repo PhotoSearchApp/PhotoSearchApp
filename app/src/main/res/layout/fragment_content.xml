@@ -6,12 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/contentList"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="1dp"
-        android:paddingEnd="1dp"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/contentListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="1dp"
+            android:paddingEnd="1dp"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+        <TextView
+            android:id="@+id/notResultText"
+            android:visibility="gone"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:text="@string/notResult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>

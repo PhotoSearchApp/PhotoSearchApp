@@ -14,6 +14,8 @@ interface ContentContract {
         fun updateContentList(contentList : MutableList<Photo>)
 
         fun showDropDownAnim()
+        fun showError(msg : String)
+        fun showNotResult()
         fun showProgress()
         fun hideProgress()
     }

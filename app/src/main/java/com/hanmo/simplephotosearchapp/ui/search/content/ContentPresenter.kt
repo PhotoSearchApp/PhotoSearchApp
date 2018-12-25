@@ -1,5 +1,8 @@
 package com.hanmo.simplephotosearchapp.ui.search.content
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.util.Log
 import com.hanmo.simplephotosearchapp.R
 import com.hanmo.simplephotosearchapp.util.RxEventBus
@@ -30,6 +33,14 @@ class ContentPresenter @Inject constructor(private val photoSearchRepository: Ph
         keywordClickedObservable()
     }
 
+    private fun isNetworkAvailable() : Boolean {
+        val connectivityManager = contentView?.getContext()?.getSystemService(Context.CONNECTIVITY_SERVICE)
+        return if (connectivityManager is ConnectivityManager) {
+            val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
+            networkInfo?.isConnected ?: false
+        } else false
+    }
+
     override fun keywordClickedObservable() {
         RxEventBus.filteredObservable(Keyword::class.java)
                 .subscribe { keyword ->
@@ -42,20 +53,34 @@ class ContentPresenter @Inject constructor(private val photoSearchRepository: Ph
         contentView?.getContext()?.run {
 
             contentView?.showProgress()
-            photoSearchRepository.getPhotos(keyword, 10, page, getString(R.string.method), getString(R.string.authKey), getString(R.string.format), 1)
-                    .doOnError { contentView?.hideProgress() }
-                    .doOnSuccess { contentView?.hideProgress() }
-                    .subscribe(
-                            { res ->
-                                res.body()?.photos?.photo?.let {
-                                    if (page == 1) {
-                                        contentView?.showContentList(it)
-                                    } else {
-                                        contentView?.updateContentList(it)
+            if (isNetworkAvailable()) {
+                photoSearchRepository.getPhotos(keyword, 10, page, getString(R.string.method), getString(R.string.authKey), getString(R.string.format), 1)
+                        .doOnError { contentView?.hideProgress() }
+                        .doOnSuccess { contentView?.hideProgress() }
+                        .subscribe(
+                                { res ->
+                                    if (res.isSuccessful) {
+                                        //contentList가 null이 아니라면 View에 data 전달
+                                        res.body()?.photos?.photo?.let { contentList ->
+                                            //page가 1이면 처음 로드하는 로직을 타야한다.
+                                            if (page == 1) {
+                                                if (contentList.isNotEmpty()) { //contentList size가 0이 아닐경우 View에 data 전달
+                                                    contentView?.showContentList(contentList)
+                                                } else { //contentList size가 0이면 결과 없음을 출력
+                                                    contentView?.showNotResult()
+                                                }
+                                            } else {
+                                                contentView?.updateContentList(contentList)
+                                            }
+                                        } ?: kotlin.run { //contentList가 null이면 결과 없음을 출력
+                                            contentView?.showNotResult()
+                                        }
                                     }
-                                }
-                            }, { error -> Log.e("photosearch ", "errror is : $error") }
-                    ).apply { compositeDisposable.add(this) }
+                                }, { error -> contentView?.showError("네트워크 오류가 발생하였습니다.") }
+                        ).apply { compositeDisposable.add(this) }
+            } else {
+                contentView?.showError("네트워크 연결상태를 확인해주십시오.")
+            }
         }
     }
 
